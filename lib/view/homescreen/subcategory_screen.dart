@@ -167,8 +167,12 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
                 SizedBox(width: 10.0,),
 
-                Text(subCategoryNotifier.filteredSubCategoryList[index].subCategoryName!,
-                    style: TextStyle(color: Colors.black,fontSize: 20)),
+                SizedBox(
+                  width: 180,
+                  child: Text(subCategoryNotifier.filteredSubCategoryList[index].subCategoryName!,
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(color: Colors.black,fontSize: 16)),
+                ),
                 Spacer(),
                 Icon(Icons.arrow_right),
               ],

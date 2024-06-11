@@ -154,8 +154,11 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                   ),
                 ),
                 SizedBox(width: 10.0,),
-                Text(subCategoryDetailsNotifier.filteredSubCategoryDetailsList[index].multiSubCategoryName!,
-                    style: TextStyle(color: Colors.black,fontSize: 20)),
+                SizedBox(
+                  width: 180,
+                  child: Text(subCategoryDetailsNotifier.filteredSubCategoryDetailsList[index].multiSubCategoryName!,
+                      style: TextStyle(color: Colors.black,fontSize: 20)),
+                ),
                 Spacer(),
                 Icon(Icons.arrow_right),
               ],
