@@ -170,8 +170,11 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
 
                 SizedBox(width: 10.0,),
 
-                Text(categoryProductNotifier.filteredCategoryProductList[index].productTitle!,
-                    style: TextStyle(color: Colors.black,fontSize: 20)),
+                SizedBox(
+                  width: 180,
+                  child: Text(categoryProductNotifier.filteredCategoryProductList[index].productTitle!,
+                      style: TextStyle(color: Colors.black,fontSize: 20)),
+                ),
                 Spacer(),
                 Icon(Icons.arrow_right),
               ],

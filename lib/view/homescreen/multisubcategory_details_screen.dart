@@ -59,7 +59,7 @@ class _MultiSubCategoryDetailsScreenState extends State<MultiSubCategoryDetailsS
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (BuildContext context) => MultiSubCategoryDetailsNotifier(context,widget.id),
+        create: (BuildContext context) => MultiSubCategoryDetailsNotifier(context,widget.productId),
         child:  Consumer<MultiSubCategoryDetailsNotifier>(
             builder: (context, mutlisubCategoryDetailsNotifier, _){
               return Scaffold(
