@@ -124,6 +124,7 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
                  return GestureDetector(
                      onTap: () {
                        var productImage = categoryProductNotifier.filteredCategoryProductList[index].featuredImage!;
+                       var productImage2 = categoryProductNotifier.filteredCategoryProductList[index].featuredImage2!;
                        var productTitle= categoryProductNotifier.filteredCategoryProductList[index].productTitle!;
                        var bearingNo= categoryProductNotifier.filteredCategoryProductList[index].bearingNo!;
                        var oePartNo = categoryProductNotifier.filteredCategoryProductList[index].oePartNo!;
@@ -132,7 +133,7 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
                        Navigator.push(
                          context,
                          MaterialPageRoute(
-                           builder: (context) => ProductDetailsScreen(productImage,productTitle,bearingNo,oePartNo,sellingPrice,seoMetaDescription),
+                           builder: (context) => ProductDetailsScreen(productImage,productImage2,productTitle,bearingNo,oePartNo,sellingPrice,seoMetaDescription),
                          ),
                        );
                      },
@@ -321,7 +322,7 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: const SizedBox(height: 160),
+                child: const SizedBox(height: 100),
               );
             },)
       );
