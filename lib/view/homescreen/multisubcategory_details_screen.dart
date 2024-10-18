@@ -113,15 +113,21 @@ class _MultiSubCategoryDetailsScreenState extends State<MultiSubCategoryDetailsS
                   ? shimmerEffectUIWidget()
                   : mutlisubCategoryDetailsNotifier.filteredMultiSubCategoryList.isNotEmpty
               ? ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount:mutlisubCategoryDetailsNotifier.filteredMultiSubCategoryList.length,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                       onTap: (){
-                    var title = mutlisubCategoryDetailsNotifier.filteredMultiSubCategoryList[index].multiTwoSubCategoryName!;
-                    var subCategroyid = mutlisubCategoryDetailsNotifier.filteredMultiSubCategoryList[index].id!;
-                    Navigator.push(context,MaterialPageRoute(builder: (context) =>CategoryProductScreen(title,widget.productId,subCategroyid)));
+                        var title = mutlisubCategoryDetailsNotifier.filteredMultiSubCategoryList[index].multiTwoSubCategoryName!;
+                        var subCategroyid = mutlisubCategoryDetailsNotifier.filteredMultiSubCategoryList[index].id!;
+                        Navigator.push(context,MaterialPageRoute(builder: (context) =>CategoryProductScreen(title:  title,
+                            cat_id: widget.productId,
+                            sub_cat_id: widget.subCategoryId,
+                            multi_sub_cat_id:widget.id ,
+                            multi_two_sub_cat_id:subCategroyid
+                        )));
                   },
 
                       child: CardItem(context,index, mutlisubCategoryDetailsNotifier));

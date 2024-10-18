@@ -43,125 +43,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _buildCardItem(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-      margin: const EdgeInsets.only(bottom: 20.0),
-      //height: 200,
-      constraints: const BoxConstraints(
-        maxWidth: 400,
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-                flex: 1,
-                child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: CachedNetworkImageProvider(  AppUrl.imagebaseUrlcategoryproduct +widget.productImage),
-                      ),
-                      borderRadius: const BorderRadius.only(topLeft:Radius.circular(10),bottomLeft:  Radius.circular(10)),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(5.0, 5.0),
-                            blurRadius: 10.0)
-                      ]),
-                )
-            ),
-            Expanded(
-              flex: 2,
-              child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(10.0),
-                          topRight: Radius.circular(10.0)),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(5.0, 5.0),
-                            blurRadius: 10.0)
-                      ]),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(widget.productTitle!,
-                          //   maxLines: 2,
-                          // overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color: Colors.black,fontSize: 20)),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Bearing No : ',
-                              style: TextStyle(color: Colors.grey,fontSize: 18),
-                            ),
-                            TextSpan(
-                              text: widget.bearingNo!,
-                              style: TextStyle(color: Colors.black,fontSize: 18),
-                            ),
-                          ],
-                        ),
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'OE Part Number : ',
-                              style: TextStyle(color: Colors.grey,fontSize: 18),
-                            ),
-                            TextSpan(
-                              text: widget.oePartNo!,
-                              style: TextStyle(color: Colors.black,fontSize: 18),
-                            ),
-                          ],
-                        ),
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Price : ',
-                              style: TextStyle(color: Colors.grey,fontSize: 18),
-                            ),
-                            TextSpan(
-                              text:"₹" +widget.sellingPrice!,
-                              style: TextStyle(color: Colors.black,fontSize: 18),
-                            ),
-                          ],
-                        ),
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Description : ',
-                              style: TextStyle(color: Colors.grey,fontSize: 18),
-                            ),
-                            TextSpan(
-                              text: widget.seoMetaDescription!,
-                              style: TextStyle(color: Colors.black,fontSize: 18),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _buildCardItem1(BuildContext context) {
     return Container(
@@ -344,56 +225,53 @@ class _ImageCarouselState extends State<ImageCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Container(
-        padding: const EdgeInsets.all(10.0),
-        margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: widget.imageUrls.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: CachedNetworkImageProvider(
-                          widget.imageUrls[index],
-                        ),
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+      child: Column(
+        children: [
+          Expanded(
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: widget.imageUrls.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: CachedNetworkImageProvider(
+                        widget.imageUrls[index],
                       ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        bottomLeft: Radius.circular(10),
-                      ),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(5.0, 5.0),
-                          blurRadius: 10.0,
-                        ),
-                      ],
                     ),
-                  );
-                },
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                    ),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(5.0, 5.0),
+                        blurRadius: 10.0,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          SizedBox(height: 20.0,),
+          Container(
+            height: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                widget.imageUrls.length,
+                    (index) => _buildDot(index),
               ),
             ),
-            SizedBox(height: 20.0,),
-            Container(
-              height: 20,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  widget.imageUrls.length,
-                      (index) => _buildDot(index),
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

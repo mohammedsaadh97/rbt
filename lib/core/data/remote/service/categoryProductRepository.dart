@@ -16,8 +16,8 @@ class CategoryProductRepository extends BaseRepository {
   factory CategoryProductRepository() => _singleInstance;
 
   //api: content banner
-  Future<CategoryProductResponse?> apiCategoryProduct(id,subid) async {
-    String endpathUrl = "cat_id=${id}&sub_cat_id=${subid}";
+  Future<CategoryProductResponse?> apiCategoryProduct(id,subid, multi_sub_cat_id, multi_two_sub_cat_id) async {
+    String endpathUrl = "cat_id=${id}&sub_cat_id=${subid}&multi_sub_cat_id=${multi_sub_cat_id}&multi_two_sub_cat_id=${multi_two_sub_cat_id}";
     Response response = await networkProvider.call(
       method: Method.GET,
       pathUrl: AppUrl.categoryProduct + endpathUrl,

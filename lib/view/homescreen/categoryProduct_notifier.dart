@@ -23,14 +23,15 @@ class CategoryProductNotifier extends BaseChangeNotifier {
   }
   List<CategoryProductData> filteredCategoryProductList = [];
 
-  CategoryProductNotifier(BuildContext context,String id,String subid) {
-    getCategoryProductNotifier(context,id,subid);
+  CategoryProductNotifier(BuildContext context,String id,subid,multi_sub_cat_id,multi_two_sub_cat_id) {
+    getCategoryProductNotifier(context,id,subid,multi_sub_cat_id,multi_two_sub_cat_id);
 
   }
 
 // for category list api call
-  getCategoryProductNotifier(context,id,subid) async {
-    await CategoryProductRepository().apiCategoryProduct(id, subid).then((value) {
+  getCategoryProductNotifier(context,id,subid,multi_sub_cat_id,multi_two_sub_cat_id) async {
+
+    await CategoryProductRepository().apiCategoryProduct(id, subid,multi_sub_cat_id,multi_two_sub_cat_id).then((value) {
       categoryProductResponse = value as CategoryProductResponse;
       if (categoryProductResponse.data != null) {
         isLoading = true;

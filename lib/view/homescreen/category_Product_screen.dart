@@ -1,21 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rbt_app/core/data/remote/network/app_url.dart';
 import 'package:rbt_app/util/app_colors.dart';
 import 'package:rbt_app/util/assets_image.dart';
-import 'package:provider/provider.dart';
 import 'package:rbt_app/util/network_image.dart';
 import 'package:rbt_app/view/homescreen/categoryProduct_notifier.dart';
 import 'package:rbt_app/view/homescreen/product_details_screen.dart';
-import 'package:rbt_app/view/homescreen/subcategorydetailslist_notifier.dart';
-import 'package:rbt_app/view/homescreen/subcategorylist_notifier.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CategoryProductScreen extends StatefulWidget {
   var title;
-  var id;
-  var subid;
-  CategoryProductScreen(this.title,this.id,this.subid,{Key? key}) : super(key: key);
+  var cat_id;
+  var sub_cat_id;
+  var multi_sub_cat_id;
+  var multi_two_sub_cat_id;
+  CategoryProductScreen({required this.title, required this.cat_id , required this.sub_cat_id, required this.multi_sub_cat_id, required this.multi_two_sub_cat_id,Key? key}) : super(key: key);
 
   @override
   State<CategoryProductScreen> createState() => _CategoryProductScreenState();
@@ -61,7 +61,7 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (BuildContext context) => CategoryProductNotifier(context,widget.id,widget.subid),
+        create: (BuildContext context) => CategoryProductNotifier(context,widget.cat_id,widget.sub_cat_id,widget.multi_sub_cat_id,widget.multi_two_sub_cat_id),
         child:  Consumer<CategoryProductNotifier>(
             builder: (context, categoryProductNotifier, _){
               return Scaffold(
