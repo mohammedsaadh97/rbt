@@ -4,12 +4,11 @@ import 'package:rbt_app/core/data/remote/network/app_url.dart';
 import 'package:rbt_app/util/app_colors.dart';
 import 'package:rbt_app/util/assets_image.dart';
 import 'package:provider/provider.dart';
-import 'package:rbt_app/view/Product_notifier.dart';
+import 'package:rbt_app/view/product/Product_notifier.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProductScreen extends StatefulWidget {
-
-  ProductScreen({Key? key}) : super(key: key);
+  const ProductScreen({super.key});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -24,7 +23,7 @@ class _ProductScreenState extends State<ProductScreen> {
       width: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.grey,
             blurRadius: 6.0,
@@ -40,12 +39,10 @@ class _ProductScreenState extends State<ProductScreen> {
               image,
               height: 80,
             ),
-            SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5,),
             Text(title,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           ],
         ),
       ),
@@ -64,8 +61,8 @@ class _ProductScreenState extends State<ProductScreen> {
                   appBar: AppBar(
                     elevation: 0.0,
                     backgroundColor: AppColors.primaryColor,
-                    title: Text("Product List"),
-                    iconTheme: IconThemeData(color: AppColors.whiteColor),
+                    title: const Text("Product List"),
+                    iconTheme: const IconThemeData(color: AppColors.whiteColor),
                   ),
                   body: subCategoryScreenWidget(context, productNotifier)
               );
@@ -79,10 +76,10 @@ class _ProductScreenState extends State<ProductScreen> {
           padding: const EdgeInsets.only(left: 10.0,right: 10.0),
           child: Column(
             children: [
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               Material(
                 elevation: 5.0,
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
                 child: TextField(
                   controller: _searchController,
                   onChanged: (query) {
@@ -90,8 +87,8 @@ class _ProductScreenState extends State<ProductScreen> {
                   },
                   cursorColor: Theme.of(context).primaryColor,
                   style:
-                  TextStyle(color: Colors.black, fontSize: 18),
-                  decoration: InputDecoration(
+                  const TextStyle(color: Colors.black, fontSize: 18),
+                  decoration: const InputDecoration(
                     hintText: "Search..",
                       suffixIcon: Material(
                         elevation: 2.0,
@@ -104,7 +101,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           horizontal: 25, vertical: 13)),
                 ),
               ),
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               productNotifier.isLoading == false
                 ? shimmerEffectUIWidget()
                   : productNotifier.filteredProductList.isNotEmpty ?
@@ -116,8 +113,8 @@ class _ProductScreenState extends State<ProductScreen> {
                 itemBuilder: (context, index) {
                   return _buildCardItem(context,index,productNotifier );
                   //CardItem(context,index, categoryProductNotifier);
-                },) : Center(child: Text("No Data Found")),
-              SizedBox(height: 20.0,),
+                },) : const Center(child: Text("No Data Found")),
+              const SizedBox(height: 20.0,),
             ],
           ),
         ),
@@ -177,17 +174,17 @@ class _ProductScreenState extends State<ProductScreen> {
                     Text(productNotifier.filteredProductList[index].productTitle!,
                      //   maxLines: 2,
                        // overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.black,fontSize: 20)),
+                        style: const TextStyle(color: Colors.black,fontSize: 20)),
                     RichText(
                       text: TextSpan(
                         children: [
-                          TextSpan(
+                          const TextSpan(
                             text: 'Bearing No : ',
                             style: TextStyle(color: Colors.grey,fontSize: 18),
                           ),
                           TextSpan(
                               text: productNotifier.filteredProductList[index].bearingNo!,
-                              style: TextStyle(color: Colors.black,fontSize: 18),
+                              style: const TextStyle(color: Colors.black,fontSize: 18),
                           ),
                         ],
                       ),
@@ -195,13 +192,13 @@ class _ProductScreenState extends State<ProductScreen> {
                     RichText(
                       text: TextSpan(
                         children: [
-                          TextSpan(
+                          const TextSpan(
                             text: 'OE Part Number : ',
                             style: TextStyle(color: Colors.grey,fontSize: 18),
                           ),
                           TextSpan(
                             text: productNotifier.filteredProductList[index].oePartNo!,
-                            style: TextStyle(color: Colors.black,fontSize: 18),
+                            style: const TextStyle(color: Colors.black,fontSize: 18),
                           ),
                         ],
                       ),
@@ -209,13 +206,13 @@ class _ProductScreenState extends State<ProductScreen> {
                     RichText(
                       text: TextSpan(
                         children: [
-                          TextSpan(
+                          const TextSpan(
                             text: 'Price : ',
                             style: TextStyle(color: Colors.grey,fontSize: 18),
                           ),
                           TextSpan(
                             text:"₹" +productNotifier.filteredProductList[index].sellingPrice!,
-                            style: TextStyle(color: Colors.black,fontSize: 18),
+                            style: const TextStyle(color: Colors.black,fontSize: 18),
                           ),
                         ],
                       ),
@@ -223,13 +220,13 @@ class _ProductScreenState extends State<ProductScreen> {
                     RichText(
                       text: TextSpan(
                         children: [
-                          TextSpan(
+                          const TextSpan(
                             text: 'Description : ',
                             style: TextStyle(color: Colors.grey,fontSize: 18),
                           ),
                           TextSpan(
                             text: productNotifier.filteredProductList[index].seoMetaDescription ?? "",
-                            style: TextStyle(color: Colors.black,fontSize: 18),
+                            style: const TextStyle(color: Colors.black,fontSize: 18),
                           ),
                         ],
                       ),

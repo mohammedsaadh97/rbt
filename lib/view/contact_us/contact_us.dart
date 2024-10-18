@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rbt_app/util/app_colors.dart';
-import 'package:rbt_app/view/contactus_notifier.dart';
+import 'package:rbt_app/view/contact_us/contactus_notifier.dart';
 
 class ContactUs extends StatefulWidget {
-  const ContactUs({Key? key}) : super(key: key);
+  const ContactUs({super.key});
 
   @override
   State<ContactUs> createState() => _ContactUsState();
@@ -23,26 +23,26 @@ class _ContactUsState extends State<ContactUs> {
               appBar: AppBar(
                 elevation: 0.0,
                 backgroundColor: AppColors.primaryColor,
-                title: Text("Contact Us"),
-                iconTheme: IconThemeData(color: AppColors.whiteColor),
+                title: const Text("Contact Us"),
+                iconTheme: const IconThemeData(color: AppColors.whiteColor),
               ),
-              body: AboutusWidget(context,contactusNotifier)
+              body: _contactUsWidget(context,contactusNotifier)
           );
         },
       ),
     );
   }
 
-  Widget AboutusWidget(BuildContext context, ContactUsNotifier contactusNotifier) {
+  Widget _contactUsWidget(BuildContext context, ContactUsNotifier contactusNotifier) {
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 10.0, right: 10.0),
           child: Column(
             children: [
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               contactusNotifier.isLoading == false
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : contactusNotifier.contactUsListData.isNotEmpty ?
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
@@ -58,8 +58,8 @@ class _ContactUsState extends State<ContactUs> {
                         ListTile(
                           title: Row(
                             children: [
-                              Icon(Icons.location_on),
-                              SizedBox(width: 5,),
+                              const Icon(Icons.location_on),
+                              const SizedBox(width: 5,),
                               Expanded(
                                 child: Text(contactusNotifier.contactUsListData[index].address!,
                                   maxLines: 3,
@@ -71,8 +71,8 @@ class _ContactUsState extends State<ContactUs> {
                         ListTile(
                           title: Row(
                             children: [
-                              Icon(Icons.call),
-                              SizedBox(width: 5,),
+                              const Icon(Icons.call),
+                              const SizedBox(width: 5,),
                               Text(contactusNotifier.contactUsListData[index].contactNumber!),
                             ],
                           ),
@@ -80,8 +80,8 @@ class _ContactUsState extends State<ContactUs> {
                         ListTile(
                           title: Row(
                             children: [
-                              Icon(Icons.mail),
-                              SizedBox(width: 5,),
+                              const Icon(Icons.mail),
+                              const SizedBox(width: 5,),
                               Text(contactusNotifier.contactUsListData[index].contactEmail!),
                             ],
                           ),
@@ -92,8 +92,8 @@ class _ContactUsState extends State<ContactUs> {
 
                 },
               )
-                  : Center(child: Text("No Data Found")),
-              SizedBox(height: 20.0,)
+                  : const Center(child: Text("No Data Found")),
+              const SizedBox(height: 20.0,)
             ],
           ),
         ),

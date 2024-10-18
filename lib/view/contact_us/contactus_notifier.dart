@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rbt_app/core/base/base_change_notifier.dart';
 import 'package:rbt_app/core/data/remote/service/contactusRepository.dart';
@@ -29,7 +30,9 @@ class ContactUsNotifier extends BaseChangeNotifier {
         isLoading = true;
         contactUsListData = contactUsResponse.data!;
       } else {
-        print("contentData API error response");
+        if (kDebugMode) {
+          print("API error on Contact us Notifier");
+        }
       }
     });
   }

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-
 import 'package:provider/provider.dart';
 import 'package:rbt_app/util/app_colors.dart';
-import 'package:rbt_app/view/aboutus_notifier.dart';
+import 'package:rbt_app/view/about_us/aboutus_notifier.dart';
 
 class AboutUS extends StatefulWidget {
-  const AboutUS({Key? key}) : super(key: key);
+  const AboutUS({super.key});
 
   @override
   State<AboutUS> createState() => _AboutUSState();
@@ -25,10 +24,10 @@ class _AboutUSState extends State<AboutUS> {
             appBar: AppBar(
               elevation: 0.0,
               backgroundColor: AppColors.primaryColor,
-              title: Text("About Us"),
-              iconTheme: IconThemeData(color: AppColors.whiteColor),
+              title: const Text("About Us"),
+              iconTheme: const IconThemeData(color: AppColors.whiteColor),
             ),
-            body: AboutusWidget(context,aboutusNotifier)
+            body: _aboutUsWidget(context,aboutusNotifier)
           );
         },
       ),
@@ -36,15 +35,16 @@ class _AboutUSState extends State<AboutUS> {
   }
 
 
-  Widget AboutusWidget(BuildContext context,AboutUsNotifier aboutusNotifier) {
+  Widget _aboutUsWidget(BuildContext context,AboutUsNotifier aboutusNotifier) {
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 10.0, right: 10.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               aboutusNotifier.isLoading == false
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : aboutusNotifier.aboutusListData.isNotEmpty ?
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
@@ -53,21 +53,19 @@ class _AboutUSState extends State<AboutUS> {
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return  ListTile(
-                 //   title: HtmlWidget(aboutusNotifier.aboutusListData[index].aboutContent),
-                    title:  WebTextHtml(context,aboutusNotifier.aboutusListData[index].aboutContent),
-                  //  title: Text(aboutusNotifier.aboutusListData[index].aboutContent),
+                    title:  _webTextHtmlWidget(context,aboutusNotifier.aboutusListData[index].aboutContent),
                   );
                 },
               )
-                  : Center(child: Text("No Data Found")),
-              SizedBox(height: 20.0,)
+                  : const Center(child: Text("No Data Found")),
+              const SizedBox(height: 20.0,)
             ],
           ),
         ),
       ),
     );
   }
-  Widget WebTextHtml(BuildContext context, dynamic htmlData){
+  Widget _webTextHtmlWidget(BuildContext context, dynamic htmlData){
   //  return Text("data");
     return  Html(
       data: htmlData,
@@ -92,6 +90,4 @@ class _AboutUSState extends State<AboutUS> {
     );
 
   }
-
-
 }
