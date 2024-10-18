@@ -3,7 +3,7 @@ import 'package:rbt_app/core/data/remote/network/app_url.dart';
 import 'package:rbt_app/util/app_colors.dart';
 import 'package:rbt_app/util/assets_image.dart';
 import 'package:provider/provider.dart';
-import 'package:rbt_app/view/homescreen/category_Product_screen.dart';
+import 'package:rbt_app/view/homescreen/category_product/category_Product_screen.dart';
 import 'package:rbt_app/view/homescreen/multisubcategorydetailslist_notifier.dart';
 import 'package:shimmer/shimmer.dart';
 

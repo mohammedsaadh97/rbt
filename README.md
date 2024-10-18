@@ -14,6 +14,19 @@ Engine • revision c4cd48e186
 Tools • Dart 3.3.4 • DevTools 2.31.1
 
 
+
+list of step for api call on product:
+step 1 :https://rbtbearings.com/apis/category
+step 2 :https://rbtbearings.com/apis/category_full_list?id=60
+step 3 :https://rbtbearings.com/apis/sub_category_full_list?id=121
+step 4 :https://rbtbearings.com/apis/multi_sub_category_full_list?id=60
+step 5 :https://rbtbearings.com/apis/category_product?cat_id=60&sub_cat_id=121&multi_sub_cat_id=366&multi_two_sub_cat_id=395
+
+
+
+
+
+
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)

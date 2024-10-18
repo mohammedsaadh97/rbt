@@ -1,11 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rbt_app/core/data/remote/network/app_url.dart';
 import 'package:rbt_app/util/app_colors.dart';
 import 'package:rbt_app/util/assets_image.dart';
 import 'package:rbt_app/util/network_image.dart';
-import 'package:rbt_app/view/homescreen/categoryProduct_notifier.dart';
+import 'package:rbt_app/view/homescreen/category_product/categoryProduct_notifier.dart';
 import 'package:rbt_app/view/homescreen/product_details_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -15,7 +14,7 @@ class CategoryProductScreen extends StatefulWidget {
   var sub_cat_id;
   var multi_sub_cat_id;
   var multi_two_sub_cat_id;
-  CategoryProductScreen({required this.title, required this.cat_id , required this.sub_cat_id, required this.multi_sub_cat_id, required this.multi_two_sub_cat_id,Key? key}) : super(key: key);
+  CategoryProductScreen({required this.title, required this.cat_id , required this.sub_cat_id, required this.multi_sub_cat_id, required this.multi_two_sub_cat_id,super.key});
 
   @override
   State<CategoryProductScreen> createState() => _CategoryProductScreenState();
@@ -30,7 +29,7 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
       width: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.grey,
             blurRadius: 6.0,
@@ -46,12 +45,10 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
               image,
               height: 80,
             ),
-            SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5,),
             Text(title,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           ],
         ),
       ),
@@ -71,24 +68,24 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
                     elevation: 0.0,
                     backgroundColor: AppColors.primaryColor,
                     title: Text(widget.title),
-                    iconTheme: IconThemeData(color: AppColors.whiteColor),
+                    iconTheme: const IconThemeData(color: AppColors.whiteColor),
                   ),
-                  body: subCategoryScreenWidget(context, categoryProductNotifier)
+                  body: _subCategoryScreenWidget(context, categoryProductNotifier)
               );
             } ));
   }
 
-  Widget subCategoryScreenWidget(BuildContext context, CategoryProductNotifier categoryProductNotifier, ){
+  Widget _subCategoryScreenWidget(BuildContext context, CategoryProductNotifier categoryProductNotifier, ){
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 10.0,right: 10.0),
           child: Column(
             children: [
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               Material(
                 elevation: 5.0,
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
                 child: TextField(
                   controller: _searchController,
                   onChanged: (query) {
@@ -96,8 +93,8 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
                   },
                   cursorColor: Theme.of(context).primaryColor,
                   style:
-                  TextStyle(color: Colors.black, fontSize: 18),
-                  decoration: InputDecoration(
+                  const TextStyle(color: Colors.black, fontSize: 18),
+                  decoration: const InputDecoration(
                     hintText: "Search..",
                       suffixIcon: Material(
                         elevation: 2.0,
@@ -110,7 +107,7 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
                           horizontal: 25, vertical: 13)),
                 ),
               ),
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               categoryProductNotifier.isLoading == false
                 ? shimmerEffectUIWidget()
                   : categoryProductNotifier.filteredCategoryProductList.isNotEmpty ?
@@ -137,16 +134,16 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
                          ),
                        );
                      },
-                     child: CardItem(context,index, categoryProductNotifier));
-                },) : Center(child: Text("No Data Found")),
-              SizedBox(height: 20.0,),
+                     child: _cardItemWidget(context,index, categoryProductNotifier));
+                },) : const Center(child: Text("No Data Found")),
+              const SizedBox(height: 20.0,),
             ],
           ),
         ),
       ),
     );
   }
-  Widget CardItem(BuildContext context,index, CategoryProductNotifier categoryProductNotifier){
+  Widget _cardItemWidget(BuildContext context,index, CategoryProductNotifier categoryProductNotifier){
     return  Padding(
       padding: const EdgeInsets.only(left: 0.0,right: 0.0,top: 10.0),
       child: ClipRRect(
@@ -160,7 +157,7 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
             child: Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(10),bottomLeft:Radius.circular(10) ),
                   child: PNetworkImage(
                       AppUrl.imagebaseUrlcategoryproduct+categoryProductNotifier.filteredCategoryProductList[index].featuredImage!,
@@ -168,140 +165,18 @@ class _CategoryProductScreenState extends State<CategoryProductScreen> {
                     fit: BoxFit.fill,
                   ),
                 ),
-
-                SizedBox(width: 10.0,),
-
+                const SizedBox(width: 10.0,),
                 SizedBox(
                   width: 180,
                   child: Text(categoryProductNotifier.filteredCategoryProductList[index].productTitle!,
-                      style: TextStyle(color: Colors.black,fontSize: 20)),
+                      style: const TextStyle(color: Colors.black,fontSize: 20)),
                 ),
-                Spacer(),
-                Icon(Icons.arrow_right),
+                const Spacer(),
+                const Icon(Icons.arrow_right),
               ],
 
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCardItem(BuildContext context,index, CategoryProductNotifier categoryProductNotifier,) {
-    return Container(
-      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-      margin: const EdgeInsets.only(bottom: 20.0),
-      //height: 200,
-      constraints: const BoxConstraints(
-        maxWidth: 400,
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-                child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                          image: CachedNetworkImageProvider( AppUrl.imagebaseUrlcategoryproduct+categoryProductNotifier.filteredCategoryProductList[index].featuredImage!,),
-                      ),
-                      borderRadius: const BorderRadius.only(topLeft:Radius.circular(10),bottomLeft:  Radius.circular(10)),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(5.0, 5.0),
-                            blurRadius: 10.0)
-                      ]),
-                )
-            ),
-            Expanded(
-              flex: 2,
-              child: Container(
-                padding: const EdgeInsets.all(10.0),
-                margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(10.0),
-                        topRight: Radius.circular(10.0)),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(5.0, 5.0),
-                          blurRadius: 10.0)
-                    ]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                    Text(categoryProductNotifier.filteredCategoryProductList[index].productTitle!,
-                     //   maxLines: 2,
-                       // overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.black,fontSize: 20)),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Bearing No : ',
-                            style: TextStyle(color: Colors.grey,fontSize: 18),
-                          ),
-                          TextSpan(
-                              text: categoryProductNotifier.filteredCategoryProductList[index].bearingNo!,
-                              style: TextStyle(color: Colors.black,fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'OE Part Number : ',
-                            style: TextStyle(color: Colors.grey,fontSize: 18),
-                          ),
-                          TextSpan(
-                            text: categoryProductNotifier.filteredCategoryProductList[index].oePartNo!,
-                            style: TextStyle(color: Colors.black,fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Price : ',
-                            style: TextStyle(color: Colors.grey,fontSize: 18),
-                          ),
-                          TextSpan(
-                            text:"₹" +categoryProductNotifier.filteredCategoryProductList[index].sellingPrice!,
-                            style: TextStyle(color: Colors.black,fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Description : ',
-                            style: TextStyle(color: Colors.grey,fontSize: 18),
-                          ),
-                          TextSpan(
-                            text: categoryProductNotifier.filteredCategoryProductList[index].seoMetaDescription!,
-                            style: TextStyle(color: Colors.black,fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                )
-              ),
-            )
-          ],
         ),
       ),
     );

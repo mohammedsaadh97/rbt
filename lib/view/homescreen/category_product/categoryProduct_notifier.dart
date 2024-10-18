@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rbt_app/core/base/base_change_notifier.dart';
-import 'package:rbt_app/core/data/remote/service/categoryListRepository.dart';
 import 'package:rbt_app/core/data/remote/service/categoryProductRepository.dart';
 import 'package:rbt_app/models/request_response/category_prduct/category_product.dart';
-import 'package:rbt_app/models/request_response/categorylist/categorylistResponse.dart';
 
 
 class CategoryProductNotifier extends BaseChangeNotifier {
@@ -39,7 +37,7 @@ class CategoryProductNotifier extends BaseChangeNotifier {
         filteredCategoryProductList = List.from(categoryProductData);
         print(categoryProductData);
       } else {
-        print("contentData API error response");
+        print("API error on get Category Product Notifier");
       }
     });
   }

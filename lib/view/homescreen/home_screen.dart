@@ -184,7 +184,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             var id = categoryNotifier.filteredCategoryList[index].id!;
                             Navigator.push(context,MaterialPageRoute(builder: (context) =>SubCategoryScreen(title,id)));
                           },
-                          //  child: cards( AppUrl.imagebaseUrlcategory + categoryNotifier.filteredCategoryList[index].categoryImage! , categoryNotifier.filteredCategoryList[index].categoryName ?? ""));
                             child: VehicleContainer( image:AppUrl.imagebaseUrlcategory + categoryNotifier.filteredCategoryList[index].categoryImage! , title: categoryNotifier.filteredCategoryList[index].categoryName ?? "",  ));
                       },)
                   : const Center(child: CircularProgressIndicator()),
