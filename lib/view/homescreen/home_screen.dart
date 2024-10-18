@@ -10,7 +10,7 @@ import 'package:rbt_app/view/homescreen/subcategory_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
-   HomeScreen({Key? key}) : super(key: key);
+   const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    super.initState();
     greeting();
   }
 
@@ -48,9 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   appBar: AppBar(
                     elevation: 0.0,
                     backgroundColor: AppColors.primaryColor,
-                    //title: Text("Good Morning"),
                     title: Text(greetingTime),
-                    iconTheme: IconThemeData(color: AppColors.whiteColor),
+                    iconTheme: const IconThemeData(color: AppColors.whiteColor),
                   ),
                   drawer: Drawer(
                     child: ListView(
@@ -94,25 +94,25 @@ class _HomeScreenState extends State<HomeScreen> {
                           leading: const Icon(Icons.person),
                           title: const Text('About Us'),
                           onTap: () {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) =>AboutUS()));
+                            Navigator.push(context,MaterialPageRoute(builder: (context) =>const AboutUS()));
                           },
                         ),
                         ListTile(
                           leading: const Icon(Icons.contact_mail),
                           title: const Text('Contact Us'),
                           onTap: () {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) =>ContactUs()));
+                            Navigator.push(context,MaterialPageRoute(builder: (context) =>const ContactUs()));
                           },
                         ),
                       ],
                     ),
                   ),
-                  body: HomeScreenWidget(context, categoryNotifier)
+                  body: _homeScreenWidget(context, categoryNotifier)
               );
             }));
   }
 
-  Widget HomeScreenWidget(BuildContext context,
+  Widget _homeScreenWidget(BuildContext context,
       CategoryNotifier categoryNotifier) {
     return SafeArea(
       child: SingleChildScrollView(
@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Container(
                   height: 80,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30)),
@@ -135,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       left: 20.0, right: 20.0, top: 10.0),
                   child: Material(
                     elevation: 5.0,
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    borderRadius: const BorderRadius.all(Radius.circular(30)),
                     child: TextField(
                       controller: _searchController,
                       onChanged: (query) {
@@ -145,8 +145,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           .of(context)
                           .primaryColor,
                       style:
-                      TextStyle(color: Colors.black, fontSize: 18),
-                      decoration: InputDecoration(
+                      const TextStyle(color: Colors.black, fontSize: 18),
+                      decoration: const InputDecoration(
                           suffixIcon: Material(
                             elevation: 2.0,
                             borderRadius:
@@ -165,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.only(left: 20.0, right: 20.0),
               child: Column(
                 children: [
-                  SizedBox(height: 20.0,),
+                  const SizedBox(height: 20.0,),
                     categoryNotifier.filteredCategoryList.length != 0
                   ? GridView.builder(
                       shrinkWrap: true,
@@ -187,8 +187,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           //  child: cards( AppUrl.imagebaseUrlcategory + categoryNotifier.filteredCategoryList[index].categoryImage! , categoryNotifier.filteredCategoryList[index].categoryName ?? ""));
                             child: VehicleContainer( image:AppUrl.imagebaseUrlcategory + categoryNotifier.filteredCategoryList[index].categoryImage! , title: categoryNotifier.filteredCategoryList[index].categoryName ?? "",  ));
                       },)
-                  : Center(child: CircularProgressIndicator()),
-                  SizedBox(height: 20.0,),
+                  : const Center(child: CircularProgressIndicator()),
+                  const SizedBox(height: 20.0,),
                 ],
               ),
             ),
@@ -242,7 +242,7 @@ class VehicleContainer extends StatelessWidget {
         width: 200,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.grey,
               blurRadius: 10.0,
@@ -263,13 +263,11 @@ class VehicleContainer extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox( height: 10,),
             Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ],
         ),

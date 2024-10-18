@@ -22,18 +22,12 @@ class MultiSubCategoryDetailsListRepository extends BaseRepository {
       pathUrl: AppUrl.multisubcategoryDetailsList + endpathUrl,
       headers:{
         'Accept': 'application/json',
-        //'Authorization': "Bearer ${authtoken}",
       }
     );
     print(response.statusCode);
     if (response.statusCode == HttpStatus.ok) {
-      print("API call sucessful on multi sub category");
-    //  ContentResponse contentResponse = contentResponseFromJson(jsonEncode(response.data));
-    //  ContentResponse contentResponse = ContentResponse.fromJson(response.data);
-     // CategoryListResponse categoryListResponse = categoryListResponseFromJson(jsonEncode(response.data));
       MultisubcategoryDetailsResponse multisubCategoryDetailsListResponse = MultisubcategoryDetailsResponse.fromJson(jsonDecode(response.data) as Map<String, dynamic>);
-      print("API call sucessful after mutli sub category");
-      print(multisubCategoryDetailsListResponse.data);
+
       return multisubCategoryDetailsListResponse;
     } else {
       print("failed API call on multi sub category");

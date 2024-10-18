@@ -21,7 +21,6 @@ class ContactUsRepository extends BaseRepository {
       pathUrl: AppUrl.contactUs,
       headers:{
         'Accept': 'application/json',
-        //'Authorization': "Bearer ${authtoken}",
       }
     );
     print(response.statusCode);

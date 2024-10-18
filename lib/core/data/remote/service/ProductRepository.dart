@@ -21,14 +21,11 @@ class ProductRepository extends BaseRepository {
       pathUrl: AppUrl.ProductList,
       headers:{
         'Accept': 'application/json',
-        //'Authorization': "Bearer ${authtoken}",
       }
     );
     print(response.statusCode);
     if (response.statusCode == HttpStatus.ok) {
-      print("API call sucessful on ProductlistResponse");
       ProductListResponse productListResponse = ProductListResponse.fromJson(jsonDecode(response.data) as Map<String, dynamic>);
-      print("API call sucessful after categoryProductResponse");
       print(productListResponse.data);
       return productListResponse;
     } else {

@@ -22,15 +22,10 @@ class SubCategoryListRepository extends BaseRepository {
       pathUrl: AppUrl.subcategoryList + endpathUrl,
       headers:{
         'Accept': 'application/json',
-        //'Authorization': "Bearer ${authtoken}",
       }
     );
     print(response.statusCode);
     if (response.statusCode == HttpStatus.ok) {
-      print("API call sucessful on sub category");
-    //  ContentResponse contentResponse = contentResponseFromJson(jsonEncode(response.data));
-    //  ContentResponse contentResponse = ContentResponse.fromJson(response.data);
-     // CategoryListResponse categoryListResponse = categoryListResponseFromJson(jsonEncode(response.data));
       SubCategoryListResponse subCategoryListResponse = SubCategoryListResponse.fromJson(jsonDecode(response.data) as Map<String, dynamic>);
       print("API call sucessful after sub category");
       print(subCategoryListResponse.data);

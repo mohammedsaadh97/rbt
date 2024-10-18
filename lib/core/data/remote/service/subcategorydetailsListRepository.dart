@@ -22,17 +22,12 @@ class SubCategoryDetailsListRepository extends BaseRepository {
       pathUrl: AppUrl.subcategoryDetailsList + endpathUrl,
       headers:{
         'Accept': 'application/json',
-        //'Authorization': "Bearer ${authtoken}",
       }
     );
     print(response.statusCode);
     if (response.statusCode == HttpStatus.ok) {
       print("API call sucessful on sub category");
-    //  ContentResponse contentResponse = contentResponseFromJson(jsonEncode(response.data));
-    //  ContentResponse contentResponse = ContentResponse.fromJson(response.data);
-     // CategoryListResponse categoryListResponse = categoryListResponseFromJson(jsonEncode(response.data));
       SubcategoryDetailsResponse subCategoryDetailsListResponse = SubcategoryDetailsResponse.fromJson(jsonDecode(response.data) as Map<String, dynamic>);
-      print("API call sucessful after sub category");
       print(subCategoryDetailsListResponse.data);
       return subCategoryDetailsListResponse;
     } else {
