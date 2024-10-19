@@ -124,7 +124,7 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget _buildCardItem(BuildContext context,index, ProductNotifier productNotifier,) {
     return Container(
       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-      margin: const EdgeInsets.only(bottom: 20.0),
+      margin: const EdgeInsets.only(bottom: 5.0),
       //height: 200,
       constraints: const BoxConstraints(
         maxWidth: 400,

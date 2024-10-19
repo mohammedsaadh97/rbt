@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rbt_app/core/data/remote/network/app_url.dart';
 import 'package:rbt_app/utils/app_colors.dart';
+import 'package:rbt_app/utils/network_image.dart';
 import 'package:rbt_app/view/product/Product_screen.dart';
 import 'package:rbt_app/view/about_us/about_us_screen.dart';
 import 'package:rbt_app/view/contact_us/contact_us.dart';
@@ -167,14 +168,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   const SizedBox(height: 20.0,),
                     categoryNotifier.filteredCategoryList.length != 0
-                  ? GridView.builder(
+                  ? ListView.builder(
                       shrinkWrap: true,
                       physics:NeverScrollableScrollPhysics(),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          ),
                       itemCount:categoryNotifier.filteredCategoryList.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
@@ -235,40 +231,38 @@ class VehicleContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      child: Container(
-        height: 180,
-        width: 200,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 10.0,
+    return Padding(
+      padding: const EdgeInsets.only(left: 0.0,right: 0.0,top: 5.0),
+      child: Card(
+        elevation: 1.0,
+        color: Colors.white,
+        child: Container(
+          height: 140.0,
+          width: MediaQuery.of(context).size.width,
+          //color: Colors.red,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 0.0,right: 10.0),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(0),bottomLeft:Radius.circular(0) ),
+                  child: PNetworkImage(
+                    image,
+                    width: MediaQuery.of(context).size.width /2,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                SizedBox(width: 20.0,),
+                Text(title,
+                    overflow: TextOverflow.fade,
+                    style: TextStyle(color: Colors.black,fontSize: 22)),
+                const Spacer(),
+                const Icon(Icons.arrow_right,size: 30.0,),
+              ],
+
             ),
-          ],
-          color: Colors.white,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-              child: Image.network(
-                image,
-                height: 120,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.fill,
-              ),
-            ),
-            const SizedBox( height: 10,),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-          ],
+          ),
         ),
       ),
     );
