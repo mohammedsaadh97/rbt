@@ -6,7 +6,7 @@ import 'package:rbt_app/view/product/Product_screen.dart';
 import 'package:rbt_app/view/about_us/about_us_screen.dart';
 import 'package:rbt_app/view/contact_us/contact_us.dart';
 import 'package:rbt_app/view/homescreen/categorylist_notifier.dart';
-import 'package:rbt_app/view/homescreen/subcategory_screen.dart';
+import 'package:rbt_app/view/homescreen/category_full_list/category_full_list_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -180,9 +180,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         return  GestureDetector(
                           onTap: (){
-                            var title = categoryNotifier.filteredCategoryList[index].categoryName!;
-                            var id = categoryNotifier.filteredCategoryList[index].id!;
-                            Navigator.push(context,MaterialPageRoute(builder: (context) =>SubCategoryScreen(title,id)));
+                            var categoryName = categoryNotifier.filteredCategoryList[index].categoryName!;
+                            var categoryId = categoryNotifier.filteredCategoryList[index].id!;
+                            Navigator.push(context,MaterialPageRoute(builder: (context) =>CategoryFullListScreen(categoryId: categoryId,categoryName: categoryName,)));
                           },
                             child: VehicleContainer( image:AppUrl.imagebaseUrlcategory + categoryNotifier.filteredCategoryList[index].categoryImage! , title: categoryNotifier.filteredCategoryList[index].categoryName ?? "",  ));
                       },)

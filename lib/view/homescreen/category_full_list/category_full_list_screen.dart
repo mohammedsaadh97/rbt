@@ -2,37 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rbt_app/core/data/remote/network/app_url.dart';
 import 'package:rbt_app/util/app_colors.dart';
-import 'package:rbt_app/util/assets_image.dart';
 import 'package:rbt_app/util/network_image.dart';
+import 'package:rbt_app/view/homescreen/category_full_list/category_full_list_notifier.dart';
 import 'package:rbt_app/view/homescreen/subcategory_details_screen.dart';
-import 'package:rbt_app/view/homescreen/subcategorylist_notifier.dart';
 import 'package:shimmer/shimmer.dart';
 
-class SubCategoryScreen extends StatefulWidget {
-  var title;
-  var id;
-  SubCategoryScreen(this.title,this.id,{Key? key}) : super(key: key);
+class CategoryFullListScreen extends StatefulWidget {
+  var categoryId;
+  var categoryName;
+
+  CategoryFullListScreen({required this.categoryId, required this.categoryName ,super.key});
 
   @override
-  State<SubCategoryScreen> createState() => _SubCategoryScreenState();
+  State<CategoryFullListScreen> createState() => _CategoryFullListScreenState();
 }
 
-class _SubCategoryScreenState extends State<SubCategoryScreen> {
+class _CategoryFullListScreenState extends State<CategoryFullListScreen> {
   TextEditingController _searchController = TextEditingController();
 
     @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => SubCategoryNotifier(context, widget.id),
-      child: Consumer<SubCategoryNotifier>(
+      create: (BuildContext context) => CategoryFullListNotifier(context, widget.categoryId),
+      child: Consumer<CategoryFullListNotifier>(
         builder: (context, subCategoryNotifier, _) {
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               elevation: 0.0,
               backgroundColor: AppColors.primaryColor,
-              title: Text(widget.title),
-              iconTheme: IconThemeData(color: AppColors.whiteColor),
+              title: Text(widget.categoryName),
+              iconTheme: const IconThemeData(color: AppColors.whiteColor),
             ),
             body: subCategoryScreenWidget(context, subCategoryNotifier),
           );
@@ -41,14 +41,14 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
     );
   }
 
-  Widget subCategoryScreenWidget(BuildContext context, SubCategoryNotifier subCategoryNotifier) {
+  Widget subCategoryScreenWidget(BuildContext context, CategoryFullListNotifier subCategoryNotifier) {
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 10.0, right: 10.0),
           child: Column(
             children: [
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               Material(
                 elevation: 5.0,
                 borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -58,8 +58,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     subCategoryNotifier.filterSubCategories(query);
                   },
                   cursorColor: Theme.of(context).primaryColor,
-                  style: TextStyle(color: Colors.black, fontSize: 18),
-                  decoration: InputDecoration(
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
+                  decoration: const InputDecoration(
                     hintText: "Search..",
                     suffixIcon: Material(
                       elevation: 2.0,
@@ -71,7 +71,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               subCategoryNotifier.isLoading == false
                   ? shimmerEffectUIWidget()
                   : subCategoryNotifier.filteredSubCategoryList.isNotEmpty ?
@@ -85,7 +85,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                         onTap: () {
                           var title = subCategoryNotifier.filteredSubCategoryList[index].subCategoryName!;
                           var subCategroyid = subCategoryNotifier.filteredSubCategoryList[index].id!;
-                          var productId = widget.id;
+                          var productId = widget.categoryId;
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -93,12 +93,12 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                             ),
                           );
                         },
-                        child: CardItem(context, index, subCategoryNotifier),
+                        child: _cardItemWidget(context, index, subCategoryNotifier),
                       );
                     },
                   )
-                  : Center(child: Text("No Data Found")),
-              SizedBox(height: 20.0,)
+                  : const Center(child: Text("No Data Found")),
+              const SizedBox(height: 20.0,)
             ],
           ),
         ),
@@ -108,41 +108,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
 
 
-  Widget cards(image, title) {
-    return Container(
-      height: 200,
-      width: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 10.0,
-          ),
-        ],
-        color: Colors.white,
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            PAssetsImage(
-              image,
-              height: 80,
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Text(title,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget CardItem(BuildContext context,index, SubCategoryNotifier subCategoryNotifier,){
+  Widget _cardItemWidget(BuildContext context,index, CategoryFullListNotifier subCategoryNotifier,){
     return  Padding(
       padding: const EdgeInsets.only(left: 0.0,right: 0.0,top: 10.0),
       child: ClipRRect(
@@ -156,7 +122,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
             child: Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(10),bottomLeft:Radius.circular(10) ),
                   child: PNetworkImage(
                     AppUrl.imagebaseUrlsubcategory+subCategoryNotifier.filteredSubCategoryList[index].subCategoryImage!,
@@ -164,8 +130,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     fit: BoxFit.fill,
                   ),
                 ),
-
-                SizedBox(width: 10.0,),
+                const SizedBox(width: 10.0,),
 
                 SizedBox(
                   width: 180,
@@ -173,8 +138,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                       overflow: TextOverflow.fade,
                       style: TextStyle(color: Colors.black,fontSize: 16)),
                 ),
-                Spacer(),
-                Icon(Icons.arrow_right),
+                const Spacer(),
+                const Icon(Icons.arrow_right),
               ],
 
             ),

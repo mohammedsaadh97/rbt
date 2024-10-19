@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rbt_app/core/base/base_change_notifier.dart';
 import 'package:rbt_app/core/data/remote/service/subcategoryListRepository.dart';
 import 'package:rbt_app/models/request_response/subcategory/sub_category_response.dart';
 
 
-class SubCategoryNotifier extends BaseChangeNotifier {
+class CategoryFullListNotifier extends BaseChangeNotifier {
   bool isLoading = false;
   late SubCategoryListResponse subCategoryListResponse ;
 
@@ -19,7 +20,7 @@ class SubCategoryNotifier extends BaseChangeNotifier {
 
   List<SubCategoryData> filteredSubCategoryList = [];
 
-  SubCategoryNotifier(BuildContext context, String id) {
+  CategoryFullListNotifier(BuildContext context, String id) {
     getSubCategoryListNotifier(context, id);
   }
 
@@ -31,7 +32,9 @@ class SubCategoryNotifier extends BaseChangeNotifier {
         subCategroyListData = subCategoryListResponse.data!;
         filteredSubCategoryList = List.from(subCategroyListData); // Initialize filtered list
       } else {
-        print("contentData API error response");
+        if (kDebugMode) {
+          print("API error on SubCategoryList Notifier");
+        }
       }
     });
   }
