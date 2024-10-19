@@ -5,7 +5,7 @@ import 'package:rbt_app/util/app_colors.dart';
 import 'package:rbt_app/view/product/Product_screen.dart';
 import 'package:rbt_app/view/about_us/about_us_screen.dart';
 import 'package:rbt_app/view/contact_us/contact_us.dart';
-import 'package:rbt_app/view/homescreen/categorylist_notifier.dart';
+import 'package:rbt_app/view/homescreen/Home/categorylist_notifier.dart';
 import 'package:rbt_app/view/homescreen/category_full_list/category_full_list_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -40,8 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (BuildContext context) => CategoryNotifier(context),
-        child: Consumer<CategoryNotifier>(
+        create: (BuildContext context) => CategoryListNotifier(context),
+        child: Consumer<CategoryListNotifier>(
             builder: (context, categoryNotifier, _) {
               return Scaffold(
                   extendBodyBehindAppBar: true,
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _homeScreenWidget(BuildContext context,
-      CategoryNotifier categoryNotifier) {
+      CategoryListNotifier categoryNotifier) {
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(

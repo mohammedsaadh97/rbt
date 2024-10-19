@@ -4,7 +4,7 @@ import 'package:rbt_app/core/data/remote/service/categoryListRepository.dart';
 import 'package:rbt_app/models/request_response/categorylist/categorylistResponse.dart';
 
 
-class CategoryNotifier extends BaseChangeNotifier {
+class CategoryListNotifier extends BaseChangeNotifier {
   bool isLoading = false;
   late CategoryListResponse categoryListResponse;
 
@@ -21,7 +21,7 @@ class CategoryNotifier extends BaseChangeNotifier {
   List<CategoryListData> filteredCategoryList = [];
 
 
-  CategoryNotifier(BuildContext context) {
+  CategoryListNotifier(BuildContext context) {
     getCategoryListNotifier(context);
 
   }
@@ -35,7 +35,7 @@ class CategoryNotifier extends BaseChangeNotifier {
         categorylistdata = categoryListResponse.data!;
         filteredCategoryList = List.from(categorylistdata); // Initialize filtered list
       } else {
-        print("contentData API error response");
+        print("API error on CategoryList Notifier");
       }
     });
   }
