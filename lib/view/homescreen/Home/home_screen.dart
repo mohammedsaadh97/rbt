@@ -59,23 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         const DrawerHeader(
                           decoration: BoxDecoration(
-                            color: AppColors.primaryColor,
+                            color: AppColors.grayColor,
                           ), //BoxDecoration
-                          child: UserAccountsDrawerHeader(
-                            decoration: BoxDecoration(
-                              color: AppColors.primaryColor,),
-                            accountName: Text(
-                              "RBT",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            accountEmail: Text("rbt_app@gmail.com"),
-                            currentAccountPictureSize: Size.square(50),
-                            currentAccountPicture: CircleAvatar(
-                              radius: 120,
-                              backgroundColor: AppColors.whiteColor,
-                              backgroundImage: AssetImage('assets/logo.png'),
-                            ),
-                          ),
+                          child: Image(image: AssetImage('assets/logo.png'),height: 500,width: 100,),
                         ), //DrawerHeader
                         ListTile(
                           leading: const Icon(Icons.home),
@@ -253,7 +239,7 @@ class VehicleContainer extends StatelessWidget {
                     fit: BoxFit.fill,
                   ),
                 ),
-                SizedBox(width: 20.0,),
+                const SizedBox(width: 20.0,),
                 Text(title,
                     overflow: TextOverflow.fade,
                     style: TextStyle(color: Colors.black,fontSize: 22)),
