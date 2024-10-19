@@ -4,7 +4,7 @@ import 'package:rbt_app/core/data/remote/network/app_url.dart';
 import 'package:rbt_app/util/app_colors.dart';
 import 'package:rbt_app/util/network_image.dart';
 import 'package:rbt_app/view/homescreen/category_full_list/category_full_list_notifier.dart';
-import 'package:rbt_app/view/homescreen/subcategory_details_screen.dart';
+import 'package:rbt_app/view/homescreen/sub_category_full_list/sub_category_full_list_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CategoryFullListScreen extends StatefulWidget {
@@ -83,13 +83,16 @@ class _CategoryFullListScreenState extends State<CategoryFullListScreen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          var title = subCategoryNotifier.filteredSubCategoryList[index].subCategoryName!;
-                          var subCategroyid = subCategoryNotifier.filteredSubCategoryList[index].id!;
+                          var subCategoryName = subCategoryNotifier.filteredSubCategoryList[index].subCategoryName!;
+                          var subCategroyId = subCategoryNotifier.filteredSubCategoryList[index].id!;
                           var productId = widget.categoryId;
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SubCategoryDetailsScreen(title, subCategroyid,productId),
+                              builder: (context) => SubCategoryFullListScreen(categoryId: subCategroyId,
+                                categoryName: subCategoryName,
+                                productId: productId,
+                                ),
                             ),
                           );
                         },

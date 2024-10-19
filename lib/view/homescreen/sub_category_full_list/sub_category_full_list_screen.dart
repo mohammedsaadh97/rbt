@@ -4,20 +4,20 @@ import 'package:rbt_app/core/data/remote/network/app_url.dart';
 import 'package:rbt_app/util/app_colors.dart';
 import 'package:rbt_app/util/assets_image.dart';
 import 'package:rbt_app/view/homescreen/multisubcategory_details_screen.dart';
-import 'package:rbt_app/view/homescreen/subcategorydetailslist_notifier.dart';
+import 'package:rbt_app/view/homescreen/sub_category_full_list/sub_category_full_list_notifier.dart';
 import 'package:shimmer/shimmer.dart';
 
-class SubCategoryDetailsScreen extends StatefulWidget {
-  var title;
-  var id;
-  var prodductId;
-  SubCategoryDetailsScreen(this.title,this.id,this.prodductId,{Key? key}) : super(key: key);
+class SubCategoryFullListScreen extends StatefulWidget {
+  var categoryName;
+  var categoryId;
+  var productId;
+  SubCategoryFullListScreen({required this.categoryName,required this.categoryId, required this.productId, super.key});
 
   @override
-  State<SubCategoryDetailsScreen> createState() => _SubCategoryDetailsScreenState();
+  State<SubCategoryFullListScreen> createState() => _SubCategoryFullListScreenState();
 }
 
-class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
+class _SubCategoryFullListScreenState extends State<SubCategoryFullListScreen> {
   TextEditingController _searchController = TextEditingController();
 
   Widget cards(image, title) {
@@ -26,7 +26,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
       width: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.grey,
             blurRadius: 6.0,
@@ -42,12 +42,10 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
               image,
               height: 80,
             ),
-            SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5,),
             Text(title,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           ],
         ),
       ),
@@ -57,8 +55,8 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (BuildContext context) => SubCategoryDetailsNotifier(context,widget.id),
-        child:  Consumer<SubCategoryDetailsNotifier>(
+        create: (BuildContext context) => SubCategoryFullListNotifier(context,widget.categoryId),
+        child:  Consumer<SubCategoryFullListNotifier>(
             builder: (context, subCategoryDetailsNotifier, _){
               return Scaffold(
                   extendBodyBehindAppBar: true,
@@ -66,24 +64,24 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                   appBar: AppBar(
                     elevation: 0.0,
                     backgroundColor: AppColors.primaryColor,
-                    title: Text(widget.title),
-                    iconTheme: IconThemeData(color: AppColors.whiteColor),
+                    title: Text(widget.categoryName),
+                    iconTheme: const IconThemeData(color: AppColors.whiteColor),
                   ),
-                  body: subCategoryScreenWidget(context, subCategoryDetailsNotifier)
+                  body: _subCategoryScreenWidget(context, subCategoryDetailsNotifier)
               );
             }
             ),
     );
   }
 
-  Widget subCategoryScreenWidget(BuildContext context, SubCategoryDetailsNotifier subCategoryDetailsNotifier,){
+  Widget _subCategoryScreenWidget(BuildContext context, SubCategoryFullListNotifier subCategoryDetailsNotifier,){
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 10.0,right: 10.0),
           child: Column(
             children: [
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               Material(
                 elevation: 5.0,
                 borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -94,8 +92,8 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                   },
                   cursorColor: Theme.of(context).primaryColor,
                   style:
-                  TextStyle(color: Colors.black, fontSize: 18),
-                  decoration: InputDecoration(
+                  const TextStyle(color: Colors.black, fontSize: 18),
+                  decoration: const InputDecoration(
                     hintText: "Search..",
                       suffixIcon: Material(
                         elevation: 2.0,
@@ -108,7 +106,7 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                           horizontal: 25, vertical: 13)),
                 ),
               ),
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               subCategoryDetailsNotifier.isLoading == false
                   ? shimmerEffectUIWidget()
                   : subCategoryDetailsNotifier.filteredSubCategoryDetailsList.isNotEmpty ?
@@ -122,18 +120,18 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                       onTap: (){
                     var title = subCategoryDetailsNotifier.filteredSubCategoryDetailsList[index].multiSubCategoryName!;
                     var submutliCategroyid = subCategoryDetailsNotifier.filteredSubCategoryDetailsList[index].id!;
-                    var subCategoryID = widget.id;
-                    Navigator.push(context,MaterialPageRoute(builder: (context) =>MultiSubCategoryDetailsScreen(title,submutliCategroyid,widget.prodductId,subCategoryID)));
+                    var subCategoryID = widget.categoryId;
+                    Navigator.push(context,MaterialPageRoute(builder: (context) =>MultiSubCategoryDetailsScreen(title,submutliCategroyid,widget.productId,subCategoryID)));
                   },
-                      child: CardItem(context,index, subCategoryDetailsNotifier));
-                },) : Text("No Data Found")
+                      child: _cardItemWidget(context,index, subCategoryDetailsNotifier));
+                },) : const Text("No Data Found")
             ],
           ),
         ),
       ),
     );
   }
-  Widget CardItem(BuildContext context,index, SubCategoryDetailsNotifier subCategoryDetailsNotifier,){
+  Widget _cardItemWidget(BuildContext context,index, SubCategoryFullListNotifier subCategoryDetailsNotifier,){
     return  Padding(
       padding: const EdgeInsets.only(left: 0.0,right: 0.0,top: 10.0),
       child: ClipRRect(
@@ -153,14 +151,14 @@ class _SubCategoryDetailsScreenState extends State<SubCategoryDetailsScreen> {
                     child: Image.network(AppUrl.imagebaseUrlmultisubcategory+subCategoryDetailsNotifier.filteredSubCategoryDetailsList[index].multiSubCategoryImage! , fit: BoxFit.cover),
                   ),
                 ),
-                SizedBox(width: 10.0,),
+                const SizedBox(width: 10.0,),
                 SizedBox(
                   width: 180,
                   child: Text(subCategoryDetailsNotifier.filteredSubCategoryDetailsList[index].multiSubCategoryName!,
                       style: TextStyle(color: Colors.black,fontSize: 20)),
                 ),
-                Spacer(),
-                Icon(Icons.arrow_right),
+                const Spacer(),
+                const Icon(Icons.arrow_right),
               ],
 
             ),
