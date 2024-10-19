@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rbt_app/util/app_colors.dart';
+import 'package:rbt_app/utils/app_colors.dart';
 import 'package:rbt_app/view/contact_us/contactus_notifier.dart';
 
 class ContactUs extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:rbt_app/core/data/remote/network/app_url.dart';
-import 'package:rbt_app/util/app_colors.dart';
-import 'package:rbt_app/util/assets_image.dart';
+import 'package:rbt_app/utils/app_colors.dart';
+import 'package:rbt_app/utils/assets_image.dart';
 import 'package:provider/provider.dart';
 import 'package:rbt_app/view/product/Product_notifier.dart';
 import 'package:shimmer/shimmer.dart';

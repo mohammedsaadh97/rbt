@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rbt_app/core/data/remote/network/app_url.dart';
-import 'package:rbt_app/util/app_colors.dart';
-import 'package:rbt_app/util/assets_image.dart';
+import 'package:rbt_app/utils/app_colors.dart';
+import 'package:rbt_app/utils/assets_image.dart';
 import 'package:provider/provider.dart';
 import 'package:rbt_app/view/homescreen/category_product/category_Product_screen.dart';
 import 'package:rbt_app/view/homescreen/multi_sub_category_full_list/multi_sub_category_full_list_notifier.dart';

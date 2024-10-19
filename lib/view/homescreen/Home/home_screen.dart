@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rbt_app/core/data/remote/network/app_url.dart';
-import 'package:rbt_app/util/app_colors.dart';
+import 'package:rbt_app/utils/app_colors.dart';
 import 'package:rbt_app/view/product/Product_screen.dart';
 import 'package:rbt_app/view/about_us/about_us_screen.dart';
 import 'package:rbt_app/view/contact_us/contact_us.dart';
