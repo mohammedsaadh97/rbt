@@ -4,15 +4,15 @@ import 'package:rbt_app/util/app_colors.dart';
 import 'package:rbt_app/util/assets_image.dart';
 import 'package:provider/provider.dart';
 import 'package:rbt_app/view/homescreen/category_product/category_Product_screen.dart';
-import 'package:rbt_app/view/homescreen/multisubcategorydetailslist_notifier.dart';
+import 'package:rbt_app/view/homescreen/multi_sub_category_full_list/multi_sub_category_full_list_notifier.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MultiSubCategoryDetailsScreen extends StatefulWidget {
-  var title;
-  var id;
+  var multiSubCategoryName;
+  var multiSubCategoryId;
   var productId;
   var subCategoryId;
-  MultiSubCategoryDetailsScreen(this.title,this.id,this.productId,this.subCategoryId,{Key? key}) : super(key: key);
+  MultiSubCategoryDetailsScreen({required this.multiSubCategoryName, required this.multiSubCategoryId, required this.productId, required this.subCategoryId ,super.key});
 
   @override
   State<MultiSubCategoryDetailsScreen> createState() => _MultiSubCategoryDetailsScreenState();
@@ -28,7 +28,7 @@ class _MultiSubCategoryDetailsScreenState extends State<MultiSubCategoryDetailsS
       width: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.grey,
             blurRadius: 6.0,
@@ -44,12 +44,10 @@ class _MultiSubCategoryDetailsScreenState extends State<MultiSubCategoryDetailsS
               image,
               height: 80,
             ),
-            SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5,),
             Text(title,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           ],
         ),
       ),
@@ -68,8 +66,8 @@ class _MultiSubCategoryDetailsScreenState extends State<MultiSubCategoryDetailsS
                   appBar: AppBar(
                     elevation: 0.0,
                     backgroundColor: AppColors.primaryColor,
-                    title: Text(widget.title),
-                    iconTheme: IconThemeData(color: AppColors.whiteColor),
+                    title: Text(widget.multiSubCategoryName),
+                    iconTheme: const IconThemeData(color: AppColors.whiteColor),
                   ),
                   body: subCategoryScreenWidget(context, mutlisubCategoryDetailsNotifier)
               );
@@ -83,19 +81,18 @@ class _MultiSubCategoryDetailsScreenState extends State<MultiSubCategoryDetailsS
           padding: const EdgeInsets.only(left: 10.0,right: 10.0),
           child: Column(
             children: [
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               Material(
                 elevation: 5.0,
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
                 child: TextField(
                   controller: _searchController,
                   onChanged: (query) {
                     mutlisubCategoryDetailsNotifier.filterMultiSubCategories(query);
                   },
                   cursorColor: Theme.of(context).primaryColor,
-                  style:
-                  TextStyle(color: Colors.black, fontSize: 18),
-                  decoration: InputDecoration(
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
+                  decoration: const InputDecoration(
                     hintText: "Search..",
                       suffixIcon: Material(
                         elevation: 2.0,
@@ -108,7 +105,7 @@ class _MultiSubCategoryDetailsScreenState extends State<MultiSubCategoryDetailsS
                           horizontal: 25, vertical: 13)),
                 ),
               ),
-              SizedBox(height: 20.0,),
+              const SizedBox(height: 20.0,),
               mutlisubCategoryDetailsNotifier.isLoading == false
                   ? shimmerEffectUIWidget()
                   : mutlisubCategoryDetailsNotifier.filteredMultiSubCategoryList.isNotEmpty
@@ -125,20 +122,20 @@ class _MultiSubCategoryDetailsScreenState extends State<MultiSubCategoryDetailsS
                         Navigator.push(context,MaterialPageRoute(builder: (context) =>CategoryProductScreen(title:  title,
                             cat_id: widget.productId,
                             sub_cat_id: widget.subCategoryId,
-                            multi_sub_cat_id:widget.id ,
+                            multi_sub_cat_id:widget.multiSubCategoryId ,
                             multi_two_sub_cat_id:subCategroyid
                         )));
                   },
 
-                      child: CardItem(context,index, mutlisubCategoryDetailsNotifier));
-                },) : Text("No Data Found")
+                      child: _cardItemWidget(context,index, mutlisubCategoryDetailsNotifier));
+                },) : const Text("No Data Found")
             ],
           ),
         ),
       ),
     );
   }
-  Widget CardItem(BuildContext context,index, MultiSubCategoryDetailsNotifier mutlisubCategoryDetailsNotifier,){
+  Widget _cardItemWidget(BuildContext context,index, MultiSubCategoryDetailsNotifier mutlisubCategoryDetailsNotifier,){
     return  Padding(
       padding: const EdgeInsets.only(left: 0.0,right: 0.0,top: 10.0),
       child: ClipRRect(
@@ -160,11 +157,11 @@ class _MultiSubCategoryDetailsScreenState extends State<MultiSubCategoryDetailsS
                     ),
                   ),
                 ),
-                SizedBox(width: 10.0,),
+                const SizedBox(width: 10.0,),
                 Text(mutlisubCategoryDetailsNotifier.filteredMultiSubCategoryList[index].multiTwoSubCategoryName!,
-                    style: TextStyle(color: Colors.black,fontSize: 20)),
-                Spacer(),
-                Icon(Icons.arrow_right),
+                    style: const TextStyle(color: Colors.black,fontSize: 20)),
+                const Spacer(),
+                const Icon(Icons.arrow_right),
               ],
 
             ),

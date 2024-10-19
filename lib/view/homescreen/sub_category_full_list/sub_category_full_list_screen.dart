@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rbt_app/core/data/remote/network/app_url.dart';
 import 'package:rbt_app/util/app_colors.dart';
 import 'package:rbt_app/util/assets_image.dart';
-import 'package:rbt_app/view/homescreen/multisubcategory_details_screen.dart';
+import 'package:rbt_app/view/homescreen/multi_sub_category_full_list/multi_sub_category_full_list_screen.dart';
 import 'package:rbt_app/view/homescreen/sub_category_full_list/sub_category_full_list_notifier.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -118,10 +118,15 @@ class _SubCategoryFullListScreenState extends State<SubCategoryFullListScreen> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                       onTap: (){
-                    var title = subCategoryDetailsNotifier.filteredSubCategoryDetailsList[index].multiSubCategoryName!;
-                    var submutliCategroyid = subCategoryDetailsNotifier.filteredSubCategoryDetailsList[index].id!;
+                    var multiSubCategoryName = subCategoryDetailsNotifier.filteredSubCategoryDetailsList[index].multiSubCategoryName!;
+                    var multisubCategroyId = subCategoryDetailsNotifier.filteredSubCategoryDetailsList[index].id!;
                     var subCategoryID = widget.categoryId;
-                    Navigator.push(context,MaterialPageRoute(builder: (context) =>MultiSubCategoryDetailsScreen(title,submutliCategroyid,widget.productId,subCategoryID)));
+
+                    Navigator.push(context,MaterialPageRoute(builder: (context) =>MultiSubCategoryDetailsScreen(multiSubCategoryName: multiSubCategoryName,
+                      multiSubCategoryId: multisubCategroyId,
+                      productId: widget.productId,
+                      subCategoryId:subCategoryID,
+                      )));
                   },
                       child: _cardItemWidget(context,index, subCategoryDetailsNotifier));
                 },) : const Text("No Data Found")
